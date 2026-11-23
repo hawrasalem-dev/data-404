@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && request.auth.uid == 'er0oLFC6uuTQNMHCIOla12BTIqS2'; }
+    function isAnonymous() {
+      return signedIn() && request.auth.token.firebase.sign_in_provider == 'anonymous';
+    }
+    function active() {
+      return get(/databases/$(database)/documents/settings/game).data.status == 'active';
+    }
+    function stagePoints(stage) {
+      return stage == '1' ? 100 : stage == '2' ? 150 : stage == '3' ? 200 : stage == '4' ? 250 : stage == '5' ? 300 : -1;
+    }
+    function stageNumber(stage) {
+      return stage == '1' ? 1 : stage == '2' ? 2 : stage == '3' ? 3 : stage == '4' ? 4 : stage == '5' ? 5 : -1;
+    }
+    // These answers are checked by Firestore security rules, not sent in React.
+    // For high-stakes competitions, use a trusted backend (Cloud Functions/Run).
+    function validAnswer(stage, answer) {
+      return (stage == '1' && answer == '42')
+          || (stage == '2' && answer == '18')
+          || (stage == '3' && answer == 'C7')
+          || (stage == '4' && answer == 'ISOLATE')
+          || (stage == '5' && answer == '42-18-C7-ISOLATE');
+    }
+    function stageSubmission(uid, stage) {
+      return /databases/$(database)/documents/submissions/$(uid)/stages/$(stage);
+    }
+    function progressFor(uid, stage) {
+      let submission = getAfter(stageSubmission(uid, stage));
+      return !exists(stageSubmission(uid, stage))
+        && submission.data.stage == stageNumber(stage)
+        && validAnswer(stage, submission.data.answer)
+        && submission.data.submittedAt == request.time
+        && resource.data.unlockedStage == stageNumber(stage)
+        && request.resource.data.unlockedStage == stageNumber(stage) + 1
+        && request.resource.data.points == resource.data.points + stagePoints(stage);
+    }
+    function validPlayerProgress(uid) {
+      return isAnonymous() && request.auth.uid == uid && active()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['points', 'unlockedStage'])
+        && ((resource.data.unlockedStage == 1 && progressFor(uid, '1'))
+          || (resource.data.unlockedStage == 2 && progressFor(uid, '2'))
+          || (resource.data.unlockedStage == 3 && progressFor(uid, '3'))
+          || (resource.data.unlockedStage == 4 && progressFor(uid, '4'))
+          || (resource.data.unlockedStage == 5 && progressFor(uid, '5')));
+    }
+    match /settings/game {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['waiting', 'active', 'paused', 'finished']
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+    }
+    match /players/{uid} {
+      allow read: if true;
+      allow create: if isAnonymous() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name', 'points', 'unlockedStage', 'status', 'joinedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.points == 0
+        && request.resource.data.unlockedStage == 1
+        && request.resource.data.status == 'READY'
+        && request.resource.data.joinedAt == request.time;
+      allow update: if isAdmin() || validPlayerProgress(uid);
+      allow delete: if isAdmin();
+    }
+    match /playerNames/{normalizedName} {
+      allow read: if signedIn();
+      allow create: if isAnonymous()
+        && normalizedName.size() >= 2 && normalizedName.size() <= 40
+        && request.resource.data.keys().hasOnly(['uid'])
+        && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+    match /submissions/{uid}/stages/{stage} {
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);
+      allow create: if isAnonymous() && request.auth.uid == uid && active()
+        && stageNumber(stage) >= 1
+        && request.resource.data.keys().hasOnly(['stage', 'answer', 'submittedAt'])
+        && request.resource.data.stage == stageNumber(stage)
+        && request.resource.data.answer is string
+        && validAnswer(stage, request.resource.data.answer)
+        && request.resource.data.submittedAt == request.time
+        && get(/databases/$(database)/documents/players/$(uid)).data.unlockedStage == stageNumber(stage)
+        && getAfter(/databases/$(database)/documents/players/$(uid)).data.unlockedStage == stageNumber(stage) + 1
+        && getAfter(/databases/$(database)/documents/players/$(uid)).data.points == get(/databases/$(database)/documents/players/$(uid)).data.points + stagePoints(stage);
+      allow update, delete: if false;
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

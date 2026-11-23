@@ -1,0 +1,1633 @@
+/* ==============================
+   GENERAL
+============================== */
+
+:root {
+  --background: #050d27;
+  --background-light: #0c1b49;
+  --blue: #4569ff;
+  --yellow: #ffc629;
+  --white: #ffffff;
+  --muted: #c7d3f4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  color: white;
+
+  background:
+    linear-gradient(
+      180deg,
+      #050b21 0%,
+      #09153b 55%,
+      #050b21 100%
+    );
+}
+
+/* GRID BACKGROUND */
+
+.app-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(64, 111, 255, 0.09) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(64, 111, 255, 0.09) 1px,
+      transparent 1px
+    );
+
+  background-size: 130px 130px;
+}
+
+.background-glow {
+  position: absolute;
+  top: 250px;
+  right: -300px;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: rgba(31, 73, 192, 0.11);
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==============================
+   HEADER
+============================== */
+
+.site-header {
+  width: min(100%, 1700px);
+  margin: auto;
+  padding: 35px 5%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.club-logo {
+  width: clamp(125px, 12vw, 190px);
+  height: auto;
+  object-fit: contain;
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 25px;
+  border: 1px solid #5279db;
+  border-radius: 100px;
+  background: rgba(29, 54, 125, 0.3);
+  white-space: nowrap;
+}
+
+.status-text {
+  font-family: Arial, sans-serif;
+  font-size: clamp(12px, 1.1vw, 18px);
+}
+
+.status-dot {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  background: #05e0b1;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #05e0b1;
+}
+
+/* ==============================
+   HERO
+============================== */
+
+.hero-section {
+  width: 100%;
+}
+
+.hero-layout {
+  width: min(100%, 1650px);
+  min-height: 680px;
+  margin: 0 auto;
+  padding: 25px 5% 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  align-items: stretch;
+  gap: clamp(20px, 3vw, 60px);
+
+  direction: ltr;
+}
+
+/* TEXT COLUMN */
+
+.hero-text {
+  min-width: 0;
+  min-height: 620px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 30px 0 55px;
+  text-align: right;
+  direction: rtl;
+}
+
+.hero-top {
+  width: 100%;
+}
+
+.hero-intro {
+  font-size: clamp(28px, 2.9vw, 49px);
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0 0 24px;
+  color: white;
+}
+
+.hero-title {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  white-space: nowrap;
+
+  font-family: Arial, sans-serif;
+  font-size: clamp(65px, 7vw, 124px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -5px;
+
+  margin: 0 0 26px;
+}
+
+.hero-title span {
+  color: white;
+}
+
+.hero-title strong {
+  color: var(--yellow);
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 16px 27px;
+  border: 2px solid var(--yellow);
+  border-radius: 18px;
+
+  color: var(--yellow);
+  font-size: clamp(20px, 2vw, 32px);
+  font-weight: 900;
+}
+
+.hero-bottom {
+  width: 100%;
+}
+
+.hero-description {
+  color: var(--muted);
+  font-size: clamp(19px, 1.65vw, 28px);
+  line-height: 1.9;
+  margin: 0 0 25px;
+}
+
+.hero-question {
+  color: var(--yellow);
+  font-size: clamp(25px, 2.25vw, 38px);
+  line-height: 1.55;
+  font-weight: 900;
+  margin: 0;
+}
+
+/* ==============================
+   DETECTIVE
+============================== */
+
+.hero-visual {
+  position: relative;
+  min-width: 0;
+  min-height: 620px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  isolation: isolate;
+}
+
+.detective-glow {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 75%;
+  height: 60%;
+
+  background: rgba(39, 85, 220, 0.19);
+  filter: blur(75px);
+  border-radius: 50%;
+
+  z-index: 0;
+}
+
+/*
+  هذا الجزء يحل مشكلة الخط المستقيم
+  أسفل صورة المحقق.
+*/
+
+.detective-mask {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      black 72%,
+      rgba(0, 0, 0, 0.85) 82%,
+      rgba(0, 0, 0, 0.35) 93%,
+      transparent 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      black 72%,
+      rgba(0, 0, 0, 0.85) 82%,
+      rgba(0, 0, 0, 0.35) 93%,
+      transparent 100%
+    );
+}
+
+.detective-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* FLOATING PROGRAMMING SYMBOLS */
+
+.floating-code {
+  position: absolute;
+  z-index: 3;
+
+  color: #74caff;
+  font-family: monospace;
+  font-weight: 800;
+  font-size: clamp(16px, 1.5vw, 25px);
+
+  text-shadow:
+    0 0 10px rgba(31, 171, 255, 0.95),
+    0 0 25px rgba(31, 171, 255, 0.55);
+
+  pointer-events: none;
+
+  animation: floatData 5s ease-in-out infinite;
+}
+
+.code-1 {
+  top: 12%;
+  left: 7%;
+}
+
+.code-2 {
+  top: 22%;
+  right: 4%;
+}
+
+.code-3 {
+  top: 40%;
+  left: 1%;
+}
+
+.code-4 {
+  top: 49%;
+  right: 1%;
+}
+
+.code-5 {
+  top: 64%;
+  left: 5%;
+}
+
+.code-6 {
+  top: 75%;
+  right: 2%;
+  font-size: 17px;
+}
+
+.code-7 {
+  top: 30%;
+  left: 15%;
+  font-size: 17px;
+}
+
+.code-8 {
+  top: 16%;
+  right: 18%;
+  font-size: 18px;
+}
+
+.code-2,
+.code-4,
+.code-6,
+.code-8 {
+  animation-delay: -2.5s;
+}
+
+@keyframes floatData {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translateY(-18px);
+    opacity: 1;
+  }
+}
+
+/* ==============================
+   STORY
+============================== */
+
+.story-section {
+  width: min(90%, 1050px);
+  margin: 20px auto 65px;
+  padding: 30px 35px;
+
+  text-align: center;
+}
+
+.story-label {
+  color: var(--yellow);
+  font-family: monospace;
+  font-size: 17px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.story-section p {
+  color: var(--muted);
+  font-size: clamp(20px, 1.7vw, 27px);
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* ==============================
+   REGISTRATION
+============================== */
+
+.registration-section {
+  width: min(90%, 800px);
+  margin: 0 auto 90px;
+  padding: 40px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(31, 58, 131, 0.45),
+      rgba(5, 14, 40, 0.8)
+    );
+
+  border: 1px solid rgba(93, 137, 255, 0.5);
+  border-radius: 30px;
+}
+
+.registration-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  color: #a9bdf1;
+  font-family: monospace;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.registration-form h2,
+.registration-success h2 {
+  font-size: clamp(27px, 3vw, 40px);
+  margin: 0 0 15px;
+}
+
+.registration-form > p,
+.registration-success > p {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.8;
+  margin: 0 0 30px;
+}
+
+.registration-form label {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.registration-form input {
+  display: block;
+  width: 100%;
+  padding: 22px 25px;
+
+  background: #07132f;
+  color: white;
+
+  border: 1px solid #5975b8;
+  border-radius: 17px;
+
+  outline: none;
+  font-size: 20px;
+}
+
+.registration-form input:focus {
+  border-color: var(--yellow);
+}
+
+.registration-form input::placeholder {
+  color: #8296c6;
+}
+
+.form-message {
+  color: #ff9a9a !important;
+  font-size: 17px !important;
+  margin: 12px 0 !important;
+}
+
+.primary-button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 19px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  background:
+    linear-gradient(
+      100deg,
+      #ffe079,
+      #ffc629
+    );
+
+  color: #06102d;
+  border: none;
+  border-radius: 18px;
+
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 900;
+}
+
+.button-arrow {
+  display: grid;
+  place-items: center;
+
+  width: 54px;
+  height: 54px;
+
+  background: #06102d;
+  color: white;
+
+  border-radius: 50%;
+  font-size: 27px;
+}
+
+.secondary-button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 23px;
+
+  color: white;
+  background: rgba(27, 54, 124, 0.35);
+
+  border: 1px solid #6384d5;
+  border-radius: 17px;
+
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.registration-success {
+  padding: 35px 15px;
+  text-align: center;
+}
+
+.success-icon {
+  color: #0ce0b5;
+  font-size: 85px;
+  margin-bottom: 15px;
+}
+
+.waiting-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  color: #0ce0b5;
+  font-size: 19px;
+  margin-top: 35px;
+}
+
+/* PARTICIPANTS */
+
+.participants-panel {
+  margin-top: 25px;
+  padding: 25px;
+
+  background: rgba(6, 17, 46, 0.8);
+  border: 1px solid #4564ae;
+  border-radius: 20px;
+}
+
+.participants-panel h3 {
+  text-align: center;
+  color: #70d7ff;
+  letter-spacing: 3px;
+  font-size: 19px;
+  margin: 0 0 25px;
+}
+
+.empty-message {
+  text-align: center;
+  color: var(--muted);
+}
+
+.participant-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 18px 0;
+  border-bottom: 1px solid #23375f;
+}
+
+.participant-row:last-child {
+  border-bottom: none;
+}
+
+.participant-rank {
+  color: #a6bbeb;
+  font-family: monospace;
+  font-size: 17px;
+}
+
+.participant-name {
+  flex: 1;
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.participant-ready {
+  color: #0ce0b5;
+  font-family: monospace;
+  font-size: 15px;
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+.site-footer {
+  padding: 35px 20px;
+  border-top: 1px solid #1c315c;
+
+  text-align: center;
+  color: #91a8d9;
+
+  font-family: monospace;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* ==============================
+   TABLET
+============================== */
+
+@media (max-width: 1100px) {
+  .hero-layout {
+    min-height: 500px;
+    gap: 15px;
+    padding: 20px 4% 0;
+  }
+
+  .hero-text {
+    min-height: 480px;
+    padding: 20px 0 35px;
+  }
+
+  .hero-intro {
+    font-size: clamp(20px, 2.7vw, 32px);
+  }
+
+  .hero-title {
+    font-size: clamp(40px, 6vw, 75px);
+    letter-spacing: -3px;
+  }
+
+  .hero-badge {
+    font-size: clamp(15px, 2vw, 22px);
+    padding: 12px 18px;
+  }
+
+  .hero-description {
+    font-size: clamp(16px, 1.8vw, 21px);
+  }
+
+  .hero-question {
+    font-size: clamp(20px, 2.4vw, 27px);
+  }
+
+  .hero-visual {
+    min-height: 480px;
+  }
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 600px) {
+  .site-header {
+    padding: 25px 5%;
+  }
+
+  .club-logo {
+    width: 120px;
+  }
+
+  .system-status {
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  .status-text {
+    font-size: 11px;
+  }
+
+  .status-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .hero-layout {
+    grid-template-columns:
+      minmax(0, 44%)
+      minmax(0, 56%);
+
+    min-height: 0;
+    padding: 25px 12px 0;
+    gap: 6px;
+
+    align-items: center;
+  }
+
+  .hero-text {
+    min-height: 0;
+    padding: 0;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .hero-intro {
+    font-size: clamp(15px, 3.5vw, 21px);
+    line-height: 1.5;
+    margin-bottom: 13px;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 6.2vw, 40px);
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+  }
+
+  .hero-badge {
+    font-size: clamp(11px, 2.7vw, 15px);
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .hero-bottom {
+    display: none;
+  }
+
+  .hero-visual {
+    min-height: 250px;
+    align-items: center;
+  }
+
+  .detective-mask {
+    height: auto;
+    align-items: center;
+  }
+
+  .detective-image {
+    width: 100%;
+    max-height: 310px;
+  }
+
+  .floating-code {
+    font-size: 10px;
+  }
+
+  .code-6,
+  .code-7,
+  .code-8 {
+    font-size: 9px;
+  }
+
+  .story-section {
+    width: 95%;
+    margin: 25px auto 40px;
+    padding: 15px;
+  }
+
+  .story-section p {
+    font-size: 19px;
+  }
+
+  .registration-section {
+    width: 95%;
+    padding: 25px 18px;
+    border-radius: 22px;
+  }
+
+  .registration-form > p,
+  .registration-success > p {
+    font-size: 17px;
+  }
+
+  .registration-form input {
+    font-size: 18px;
+  }
+
+  .primary-button {
+    font-size: 22px;
+  }
+
+  .secondary-button {
+    font-size: 18px;
+  }
+
+  .registration-heading {
+    font-size: 11px;
+  }
+}
+
+/* ==============================
+   VERY SMALL PHONES
+============================== */
+
+@media (max-width: 380px) {
+  .club-logo {
+    width: 100px;
+  }
+
+  .status-text {
+    font-size: 9px;
+  }
+
+  .hero-intro {
+    font-size: 14px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .hero-badge {
+    font-size: 10px;
+  }
+
+  .floating-code {
+    font-size: 8px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-code {
+    animation: none;
+  }
+}
+/* ==============================
+   FIREBASE ADMIN + STAGES ADDITIONS
+   (original responsive design preserved)
+============================== */
+.registration-form .field-label { margin-top: 20px; }
+.registration-form button:disabled, .admin-actions button:disabled { opacity: .45; cursor: not-allowed; }
+.admin-section { margin-top: 45px; }
+.admin-section h2 { font-size: clamp(26px, 3vw, 38px); }
+.admin-section h3 { color: var(--yellow); margin: 30px 0 12px; }
+.admin-summary { font-size: 19px; color: var(--muted); }
+.admin-summary strong { color: white; }
+.admin-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+.admin-actions button { border: 1px solid #7193f4; border-radius: 14px; background: #142b68; color: white; padding: 16px 10px; font-size: 17px; font-weight: 800; }
+.admin-actions button:first-child { background: var(--yellow); color: #07132f; border-color: var(--yellow); }
+.back-link { display: inline-block; margin-top: 25px; color: #91d9ff; text-decoration: none; }
+.mission-launch { padding-top: 18px; }
+.mission-launch h3 { color: var(--yellow); font-size: 27px; }
+.mission-launch p { color: var(--muted); }
+.stage-list { text-align: right; margin-top: 22px; }
+.stage-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 1px solid #37528e; background: #0a1b45; border-radius: 14px; padding: 15px; margin-bottom: 10px; font-weight: 800; }
+.stage-row small { color: var(--yellow); white-space: nowrap; font-family: monospace; }
+.stage-note { font-size: 14px; line-height: 1.8; }
+@media (max-width: 600px) { .admin-actions { grid-template-columns: 1fr; } .stage-row { font-size: 13px; } .stage-row small { font-size: 11px; } }
+
+/* ==============================
+   INTERACTIVE CHALLENGES
+============================== */
+.stage-button { width: 100%; text-align: right; color: white; font: inherit; cursor: pointer; }
+.stage-button:disabled { cursor: not-allowed; opacity: .62; }
+.stage-button:not(:disabled):hover { border-color: var(--yellow); background: #132b65; }
+.stage-done { border-color: #0ce0b5; }
+.stage-done small { color: #0ce0b5; }
+.puzzle-panel { margin: 25px 0 12px; padding: clamp(18px, 3vw, 30px); border: 1px solid #557bd4; border-radius: 20px; background: #081534; text-align: right; }
+.puzzle-kicker { color: #70d7ff; font: 700 14px monospace; letter-spacing: 1px; }
+.puzzle-panel h4 { font-size: clamp(23px, 3vw, 30px); color: var(--yellow); margin: 16px 0; }
+.puzzle-panel p { font-size: 17px; line-height: 1.9; color: #d5e0ff; }
+.puzzle-code { overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; padding: 20px; border: 1px solid #284679; border-radius: 14px; background: #030a1c; color: #9de4ff; font: 15px/1.8 Consolas, monospace; text-align: left; }
+.puzzle-panel label { display: block; margin: 18px 0 10px; font-weight: 800; }
+.puzzle-panel input { width: 100%; border: 1px solid #5d7fc5; border-radius: 12px; background: #06112a; color: white; padding: 16px; font: inherit; outline: none; }
+.puzzle-panel input:focus { border-color: var(--yellow); }
+.stage-complete { color: #0ce0b5 !important; font-weight: 900; }
+@media (max-width: 600px) { .puzzle-code { font-size: 12px; } .puzzle-panel { padding: 16px; } }
+
+/* ==========================================
+   NOVA // FINAL MISSION CELEBRATION
+   ========================================== */
+
+.nova-finale {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(34, 90, 145, 0.25), transparent 55%),
+    transparent;
+  color: #ffffff;
+  text-align: center;
+  isolation: isolate;
+}
+
+.nova-finale-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  animation: novaFadeIn 0.9s ease both;
+}
+
+.nova-finale-badge {
+  display: inline-block;
+  padding: 9px 22px;
+  border: 1px solid rgba(255, 218, 68, 0.45);
+  border-radius: 50px;
+  background: rgba(255, 218, 68, 0.08);
+  color: #ffda44;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 800;
+  direction: ltr;
+}
+
+.nova-finale-symbol {
+  font-size: 75px;
+  color: #ffda44;
+  margin: 18px 0 0;
+  text-shadow: 0 0 45px rgba(255, 218, 68, 0.45);
+  animation: novaGlow 2s ease-in-out infinite alternate;
+}
+
+.nova-finale h1 {
+  font-size: clamp(36px, 6vw, 62px);
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 12px;
+}
+
+.nova-finale-subtitle {
+  font-size: 15px;
+  line-height: 2;
+  color: #b9c9db;
+  margin-bottom: 38px;
+}
+
+/* White detective card */
+
+.nova-detective-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 26px 30px 22px;
+  border-radius: 22px;
+  background: #ffffff;
+  color: #15263e;
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  animation: novaCardEnter 1s ease both;
+}
+
+.nova-detective-card::before {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: rgba(255, 218, 68, 0.12);
+  top: -110px;
+  right: -90px;
+}
+
+.nova-detective-card::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 47, 80, 0.08);
+  bottom: -110px;
+  left: -90px;
+}
+
+.nova-card-top,
+.nova-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  direction: ltr;
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  color: #8190a3;
+}
+
+.nova-card-top span:first-child {
+  color: #15263e;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.nova-card-seal {
+  width: 72px;
+  height: 72px;
+  margin: 30px auto 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #ffda44;
+  color: #14243c;
+  font-size: 42px;
+  box-shadow: 0 8px 25px rgba(255, 218, 68, 0.3);
+}
+
+.nova-card-label {
+  margin: 0 0 8px;
+  color: #8190a3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.nova-card-name {
+  font-size: clamp(25px, 5vw, 34px);
+  font-weight: 900;
+  color: #14243c;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.nova-card-divider {
+  height: 1px;
+  margin: 23px auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d7dde5,
+    transparent
+  );
+}
+
+.nova-card-rank-icon {
+  font-size: 31px;
+  color: #d6a900;
+  margin-bottom: 8px;
+}
+
+.nova-card-rank {
+  font-size: 23px;
+  font-weight: 900;
+  color: #14243c;
+  margin: 0 0 7px;
+}
+
+.nova-card-type {
+  color: #8190a3;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  direction: ltr;
+  margin: 0 0 25px;
+}
+
+.nova-card-points {
+  padding: 18px;
+  border-radius: 14px;
+  background: #f5f7fa;
+  margin-bottom: 25px;
+}
+
+.nova-card-points span {
+  display: block;
+  font-size: 12px;
+  color: #748398;
+  margin-bottom: 5px;
+}
+
+.nova-card-points strong {
+  font-size: 43px;
+  color: #14243c;
+  font-weight: 900;
+}
+
+.nova-card-points small {
+  color: #8996a6;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nova-card-bottom {
+  border-top: 1px solid #edf0f3;
+  padding-top: 16px;
+  font-size: 8px;
+}
+
+.nova-card-bottom span:last-child {
+  color: #25916d;
+}
+
+/* Celebration text and button */
+
+.nova-finale-message {
+  color: #b9c9db;
+  font-size: 14px;
+  line-height: 2;
+  margin: 32px auto 24px;
+}
+
+.nova-finale-actions button {
+  background: #ffda44;
+  color: #15263e;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 30px;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nova-finale-actions button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 218, 68, 0.2);
+}
+
+.nova-finale-leaderboard {
+  margin-top: 30px;
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  text-align: right;
+}
+
+.nova-finale-leaderboard h3 {
+  color: #ffda44;
+  font-size: 15px;
+  direction: ltr;
+  text-align: center;
+}
+
+.nova-finale-leaderboard > p {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.nova-finale-footer {
+  margin-top: 40px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #60748d;
+  direction: ltr;
+}
+
+/* Falling confetti */
+
+.nova-confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.nova-confetti span {
+  position: absolute;
+  top: -20px;
+  left: var(--x);
+  width: 7px;
+  height: 13px;
+  background: var(--color);
+  opacity: 0;
+  border-radius: 2px;
+  animation: novaConfettiFall var(--duration) linear var(--delay) 3;
+}
+
+@keyframes novaConfettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes novaFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes novaCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes novaGlow {
+  from {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+
+  to {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .nova-finale {
+    padding: 60px 16px;
+  }
+
+  .nova-detective-card {
+    padding: 22px 20px;
+    border-radius: 18px;
+  }
+
+  .nova-card-top,
+  .nova-card-bottom {
+    font-size: 7px;
+  }
+
+  .nova-card-name {
+    font-size: 27px;
+  }
+
+  .nova-card-points strong {
+    font-size: 37px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nova-confetti span,
+  .nova-finale-content,
+  .nova-detective-card,
+  .nova-finale-symbol {
+    animation: none;
+  }
+}
+
+/* ==========================================
+   DATA//404 — PREMIUM DETECTIVE ID CARD
+   BLUE × YELLOW EDITION
+   ========================================== */
+
+.nova-detective-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #112849;
+  border: 2px solid rgba(255, 215, 65, 0.9);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.38),
+    0 0 45px rgba(255, 213, 55, 0.12);
+  text-align: center;
+  isolation: isolate;
+}
+
+/* إزالة الزخارف القديمة */
+.nova-detective-card::before,
+.nova-detective-card::after {
+  display: none;
+}
+
+/* شريط أزرق علوي */
+.nova-card-top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 24px;
+  background: linear-gradient(
+    125deg,
+    #071a36 0%,
+    #123c75 55%,
+    #1b61a1 100%
+  );
+  border-bottom: 5px solid #ffda44;
+  color: #d4e9ff;
+  direction: ltr;
+  z-index: 1;
+}
+
+.nova-card-top span:first-child {
+  color: #ffda44;
+  font-size: 21px;
+  font-weight: 1000;
+  letter-spacing: -1px;
+}
+
+.nova-card-top span:last-child {
+  color: #d6e9ff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+/* ختم المحقق */
+.nova-card-seal {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  margin: 29px auto 14px;
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    145deg,
+    #ffe783,
+    #ffcf31 55%,
+    #e8a900
+  );
+  color: #0b2850;
+  font-size: 53px;
+  border: 5px solid #ffffff;
+  outline: 2px solid #ffda44;
+  box-shadow:
+    0 10px 28px rgba(255, 196, 30, 0.28),
+    inset 0 2px 8px rgba(255, 255, 255, 0.55);
+  transform: rotate(-7deg);
+}
+
+/* عنوان البطاقة */
+.nova-card-label {
+  display: inline-block;
+  padding: 6px 18px;
+  margin: 7px 0 14px;
+  background: #eaf3ff;
+  border: 1px solid #c5ddf8;
+  border-radius: 30px;
+  color: #17518f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* اسم المحقق */
+.nova-card-name {
+  margin: 0 18px;
+  font-size: clamp(26px, 5vw, 35px);
+  font-weight: 1000;
+  color: #0c2c56;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* فاصل مزخرف */
+.nova-card-divider {
+  width: 72%;
+  height: 2px;
+  margin: 22px auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffda44 25%,
+    #2371bb 50%,
+    #ffda44 75%,
+    transparent
+  );
+}
+
+/* أيقونة الرتبة */
+.nova-card-rank-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff7d8;
+  border: 2px solid #ffda44;
+  color: #c99700;
+  font-size: 34px;
+}
+
+/* لقب المحقق */
+.nova-card-rank {
+  margin: 0 16px 7px;
+  font-size: 25px;
+  font-weight: 1000;
+  color: #0e3970;
+}
+
+.nova-card-type {
+  margin: 0 16px 24px;
+  color: #3974ac;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  direction: ltr;
+}
+
+/* صندوق النقاط */
+.nova-card-points {
+  position: relative;
+  margin: 0 24px 27px;
+  padding: 19px 14px;
+  border-radius: 16px;
+  background: linear-gradient(
+    120deg,
+    #eef6ff 0%,
+    #f8fbff 55%,
+    #fff5ce 100%
+  );
+  border: 1px solid #d4e5f7;
+  box-shadow: inset 0 0 0 1px #ffffff;
+}
+
+.nova-card-points span {
+  display: block;
+  color: #2b639d;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.nova-card-points strong {
+  font-size: 48px;
+  font-weight: 1000;
+  color: #0b346a;
+  line-height: 1.2;
+}
+
+.nova-card-points small {
+  font-size: 12px;
+  color: #53789e;
+  font-weight: 800;
+}
+
+/* الشريط السفلي */
+.nova-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 17px 24px;
+  margin: 0;
+  background: #0c2850;
+  border-top: 3px solid #ffda44;
+  direction: ltr;
+}
+
+.nova-card-bottom span {
+  color: #d1e4fb;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+.nova-card-bottom span:last-child {
+  color: #ffda44;
+}
+
+/* دخول البطاقة */
+.nova-detective-card {
+  animation: novaPremiumCard 0.9s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes novaPremiumCard {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.94) rotate(-2deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+/* الجوال */
+@media (max-width: 480px) {
+  .nova-detective-card {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  .nova-card-top {
+    padding: 19px 16px;
+  }
+
+  .nova-card-top span:first-child {
+    font-size: 18px;
+  }
+
+  .nova-card-top span:last-child {
+    font-size: 7px;
+  }
+
+  .nova-card-seal {
+    width: 80px;
+    height: 80px;
+    font-size: 46px;
+  }
+
+  .nova-card-name {
+    font-size: 27px;
+  }
+
+  .nova-card-rank {
+    font-size: 22px;
+  }
+
+  .nova-card-points {
+    margin: 0 16px 22px;
+  }
+
+  .nova-card-bottom {
+    padding: 15px 16px;
+  }
+
+  .nova-card-bottom span {
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nova-detective-card {
+    animation: none;
+  }
+}
+
+/* NOVA — Card Download Button */
+
+.nova-finale-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.nova-finale-actions button {
+  width: 100%;
+  max-width: 320px;
+  min-height: 50px;
+}
+
+.nova-finale-actions .nova-download-button {
+  background: linear-gradient(135deg, #ffdf57, #ffc928);
+  color: #0c2850;
+  border: 2px solid #ffe77c;
+  box-shadow: 0 8px 25px rgba(255, 218, 68, 0.2);
+}
+
+.nova-finale-actions .nova-download-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 218, 68, 0.35);
+}
+
+.nova-finale-actions button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+/* Fix downloaded detective card */
+
+.nova-detective-card {
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+.nova-detective-card * {
+  box-sizing: border-box;
+}
+.puzzle-panel,
+.participants-panel,
+.nova-finale {
+  scroll-margin-top: 30px;
+}
